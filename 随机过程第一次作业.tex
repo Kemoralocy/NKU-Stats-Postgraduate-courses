@@ -1,0 +1,127 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}  % 数学公式
+\usepackage{amssymb} % 数学符号
+\usepackage{geometry} % 页面设置
+\usepackage{ctex}     % 中文支持
+\geometry{a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm} % 页边距
+
+\title{随机过程第一次作业}
+\author{贺昱霖 \\ 学号：1120240083}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{1.3}
+以$X_n$记具有参数($n,p_n),n\geqslant$1 的一个二项随机变量. 如果在$n\to\infty$时$np_n\to \lambda$ ,
+证明当$n\to\infty$时
+$$P\{X_n=i\}\to\mathrm{e}^{-\lambda}\lambda^i/i!$$
+
+    \textbf{证明：}
+
+$$\begin{aligned}
+P\{X_{n}=i\} & =
+\begin{pmatrix}
+{n} \\
+{i}
+\end{pmatrix}p_{n}^{i}\left(1-p_{n}\right)^{n-i} \\
+ & =\frac{n!}{i!(n-i)!}p_n^i(1-p_n)^{n-i} \\
+ & =\frac{n!}{(n-i)!\cdot n^i}(np_n)^i\cdot\frac{1}{i!}\cdot(1-\frac{np_n}{n})^n\cdot\frac{1}{(1-p_n)^i} \\
+ & \to\lambda^i\frac{1}{i!}e^{-\lambda}\quad(当n\to+\infty)
+\end{aligned}$$
+
+
+
+\section*{1.9}
+在$n$个选手的循环赛中，$\binom n2$对选手中每对恰好比赛一次，其结果是任意一次比赛一个选手赢而另一个输. 假设在开始时参赛者标以数字 1,2,...,n. 如果$i_1$打败$i_2,i_2$打败$i_3\cdots i_{n-1}$打败$i_n$ ,排列$i_1,\cdots,i_n$称为 Hamilton 排列. 证明：存在循环赛的一个结果：它的 Hamilton 排列的个数至少有$n! / 2^n$ .
+    
+\textbf{解：}
+引入一个概率：对于一场循环赛，定义H为Hamilton排列的个数。$X_{ij}$ 为选手i与选手j比赛后选手i的胜负情况，$X_{ij}=1$ 表示选手$i$胜，反之为负。由于是等可能排列，故易知 $X_{ij}\sim B(1,\frac{1}{2})$ 和$X_{ji}=1-X_{ij}$；  
+设$r=[i_1,i_2,...,i_n]$ 是$1,\cdots ,n$的一个排列。  
+$X_r$ 定义为在排列r时，是否为一个 Hamilton 排列。故$ H=\sum_r X_r.$  由独立性，$E(X_r)=E(\sum_{k=1}^{n-1}X_{i_k,i_{k+1}})=\frac{1}{2^{n-1}}$  
+则，$E(H)=E(\sum_r X_r)=\sum_r E(X_r)=\frac{n!}{2^{n-1}}>\frac{n!}{2^n}.$
+
+由于随机变量至少有一个值与其均值一样大，故可断言存在循环赛的一个结果，它的 Hamilton 排列的个数至少有$n! / 2^n$ 
+
+\section*{1.13}
+考虑一副标记有1到$n$ 的$n$ 张纸牌的下述洗牌法.从这副牌取第一张，并且将它等可能地放回到正好$k($对$k=0,1,\cdots,n-1)$张纸牌的下面.继续做这样的操作直至在开始时这副牌的最后一张牌如今在第一张为止.然后再做一次并停止.
+
+(a)假设在某个时间有$k$张牌在开始时最后一张牌的下面. 给出$k$张牌的这个集合，解释为什么这
+最后的$k$张牌可能的$k!$排序中的每个都是等可能的.
+
+(b)这副牌的最后次序是等可能地为 N!种可能次序中的一个. 给出此结论的推导过程.
+
+(c)求洗牌操作的平均次数.
+
+\textbf{解：}
+
+(a) 这$k$张牌可能是1到$n-1$中的任意$k$张牌。假设现在有$m(<k)$张牌在开始时最后一张牌的下面，此时新的牌可以插入到$m$张牌中任何位置，由归纳法知最后的$k$张牌可能的$k!$排序中的每个都是等可能的。
+
+(b)由(a)小问知，在某个时间有$n-1$张牌在开始时最后一张牌的下面时这最后的$n-1$张牌次序是等可能地为 $(n-1)!$种可能次序中的一个，此时将最后一张牌等可能地放回到正好$k($对$k=0,1,\cdots,n-1)$张纸牌的下面有$n$种情况，故最后次序为$n\cdot(n-1)!=n!$种可能次序中的一种。
+
+(c) 由(a)问，我们可以把洗牌过程分为$n-1$步，在每一步中，标记为$n$的牌上升一张牌。记$X_k$为第$k$步的洗牌操作次数，由于在第$k$步中洗牌操作的牌能放回到标记为$n$的牌的下面的概率为$\frac{k}{n}$，故$X_k$服从均值为$\frac{n}{k}$的几何分布。
+故洗牌操作的平均次数为
+$$
+E(X)=E(\sum_iX_i)+1=n(1+1/2+1/3+\cdots+1/(n-1))+1
+$$
+\section*{1.16}
+令$f(x)$和$g(x)$是概率密度函数.假设对一切$x$,存在某个$c$使$f(x)\leqslant cg(x).$假设我们可以生
+成具有密度函数 g 的随机变量，且考虑以下算法：
+
+第1步：生成具有密度函数$g$的随机变量 Y.
+
+第2步：生成均匀的(0,1)随机变量$U.$
+
+第3步：若$U\leqslant\frac {f(Y)}{cg(Y)}$,则令$X=Y;$否则返回第1步.
+假定相继生成的随机变量是独立的，证明
+
+(a)$X$具有密度函数$f(x).$
+
+(b)此算法生成 $X$ 必须迭代的次数是均值为c 的几何随机变量.
+
+\textbf{证明：}
+
+(a)
+$$\begin{aligned}
+P(X\leq t) & =P(Y\leq t\mid U\leq\frac{f(Y)}{cg(Y)}) \\
+\text{（由贝叶斯公式） } & =\frac{\int_{-\infty}^{t}P(u\leq\frac{f(Y)}{cg(Y)}|Y)g(x)dx }{\int_{-\infty}^{+\infty}P(u\leq\frac{f(Y)}{cg(Y)}|Y)g(x)dx}\\
+ & =\frac{\int_{-\infty}^{t}\frac{f(x)}{cg(x)}g(x)dx}{\int_{-\infty}^{+\infty}\frac{f(x)}{cg(x)}g(X)dx}=\frac{\frac{1}{c}\int_{-\infty}^{t}f(x)dx}{\frac{1}{c}} \\
+ & =\int_{-\infty}^{t}f(x)dx
+\end{aligned}$$
+故 $X$密度函数为$f(x)$
+
+(b)由于$P(U\leq\frac{f(Y)}{cg(Y)})=\int_{-\infty}^{+\infty}{P(U\leq\frac{f(
+Y
+)}{cg(Y)}|Y)}g(x)dx=\frac{1}{c}$  
+由于每次抽取独立的，故抽取次数服从均值为$c$的几何分布。
+\section*{1.21}
+令$U_1,U_2,\cdots$为独立的(0,1)均匀随机变量，而以 $N$ 记 $n$ 使
+
+$$\prod_{i=1}^nU_i\geqslant\mathrm{e}^{-\lambda}>\prod_{i=1}^{n+1}U_i\:,\quad\text{其中}\prod_{i=1}^0U_i=1$$
+
+的(n$\geqslant0)$的最小值. 证明 N 是具有均值$\lambda$ 的 Poisson 随机变量.
+
+\textbf{证明：}
+
+下面对$n$采用归纳法。
+
+当$n=1$时$$\begin{aligned}
+P(N=1) & =P(U_{1}\geq e^{-\lambda}>U_{1}\cdot U_{2}) \\
+\text{（由全概率公式）} & =\int_{e^{-\lambda}}^{1}P(U_{2}<\frac{e^{-\lambda}}{u_{1}}|U_1)\cdot f_{U_1}(x)dx \\
+ & =\int_{e^{-\lambda}}^{1}\frac{e^{-\lambda}}{x}dx \\
+ & =\lambda e^{-\lambda}.
+\end{aligned}$$
+假设当$n=m$时结论成立，$P\{N=m\}=e^{-\lambda}\frac{x^{m}}{m!}$
+
+当$n=m+1$时
+
+$$\begin{aligned}
+  P\{N=m+1\}&=P(\sum_{i=1}^{m+1}U_{i}\ge e^{-\lambda}>\sum_{i=1}^{m+2}U_{i}) \\
+ & =P(\sum_{i=2}^{m+1}U_{i}\geq\frac{e^{-\lambda}}{u_{1}}>\sum_{i=2}^{m+2}U_{i}) \\
+ & =\int_{0}^{1}P(\sum_{i=2}^{m+1}U_{i}\geq\frac{e^{-\lambda}}{U_1}>\sum_{i=2}^{m+2}U_{i}|U_{1})f_{U_1}(x)dx \\
+ & =\int_{e^{-\lambda}}^{1}\frac{e^{-\lambda}}{x}\frac{(\lambda+\log x)^{m}}{m!}dx \\
+ & =e^{-\lambda}\frac{x^{m+1}}{(m+1)!}
+\end{aligned}$$
+故N 是具有均值$\lambda$ 的 Poisson 随机变量。
+\end{document}
