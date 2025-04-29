@@ -1,0 +1,176 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}  % 数学公式
+\usepackage{amssymb} % 数学符号
+\usepackage{geometry} % 页面设置
+\usepackage{ctex}     % 中文支持
+\geometry{a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm} % 页边距
+
+\title{随机过程第二次作业}
+\author{贺昱霖 \\ 学号：1120240083}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{2.5}
+假设$\{N_1(t),t\geqslant0\}$和$\{ N_2(t),t\geqslant0\}$是速率分别为$\lambda_1$ 和 $\lambda_2$ 的独立的 Poisson 过程. 证明$\{{N}_1(t)+N_2(t),t\geq0\}$是速率为\(\lambda_1+\lambda_2\)的Poisson 过程。进而，证明这个联合过程的首个事件来自$\{N_1(t),t\geqslant0\}$的概率是$\lambda_1/(\lambda_1+\lambda_2)$,它独立于此事件发生的时刻.
+
+    \textbf{证明：}
+
+(1) $
+N_{1} ( 0)+N_{2} ( 0 )=0+0=0 
+$
+
+(2) $N_{1} ( t )$ 和 $N_{2} ( t )$ 是独立增量，且 $N_{1} ( t )$ 和 $N_{2} ( t )$ 独立，故 $\mathrm{N} ( t )$ 是独立增量
+
+(3) $$\begin{aligned}
+ & P(N_{1}(t+h)+N_{2}(t+h)-(N_{1}(t)+N_{2}(t))=n) \\
+ & =\sum_{i=0}^{n}P(N_{1}(t+h)-N_{1}(t)=i,N_{2}(t+h)-N_{2}(t)=n-i) \\
+\text{(由独立性)} & =\sum_{i=0}^{n}P(N_{1}(t+h)-N_{1}(t)=i)\cdot P(N_{2}(t+h)-N_{2}(t))=n-i) \\
+ & =\sum_{i=0}^{n}e^{-\lambda_{1}h}\frac{(\lambda_{1}h)^{i}}{i!}\cdot e^{-\lambda_{2}h}\frac{(\lambda_{2}h)^{n-i}}{(n-i)!}=\sum_{i=0}^{n}e^{-(\lambda_{1}+\lambda_{2})h}\cdot\frac{h^{n}}{n!}\frac{n!\lambda_{1}^{i}\lambda_{2}^{n-i}}{i!(n-i)!} \\
+ & =e^{-(\lambda_{1}+\lambda_{2})h}\cdot\frac{h^{n}\cdot(\lambda_{1}+\lambda_{2})^{n}}{n!}
+\end{aligned}$$
+故$\{{N}_1(t)+N_2(t),t\geq0\}$是速率为\(\lambda_1+\lambda_2\)的Poisson 过程。
+
+对\(\forall t,\)由全概率公式，首个事件概率为$$\begin{aligned}
+P(N_{1}(t)=1|N_{1}(t)+N_{2}(t)=1) & =\frac{P(N_{1}(t),N_{1}(t)+N_{2}(t)=1)}{P(N_{1}(t)+N_{2}(t)=1)}=\frac{\lambda_{1}te^{-\lambda_{1}t}e^{-\lambda_{2}t}}{(\lambda_{1}+\lambda_{2})te^{-\lambda_{1}t}} \\
+ & =\frac{\lambda_{1}}{\lambda_{1}+\lambda_{2}}
+\end{aligned}$$
+独立于此事件发生的时刻。
+
+\section*{2.8}
+生成一个 Poisson 随机变量。令 $U_{1}, U_{2}, \cdots$ 是独立的(0,1)均匀随机变量. 
+
+(a)如果 $X_{i} \,=\, (-\operatorname{l n} \! U_{i} ) \, / \lambda$ ，证明 $X_{i}$ 是具有失效率\(\lambda\)的指数随机变量. 
+
+(b)用(a)部分证明，当 $N$ 定义为等于满足
+$$
+\prod_{i=1}^{n} U_{i} \geqslant\mathrm{e}^{-\lambda} > \prod_{i=1}^{n+1} U_{i} 
+$$
+的 $n$ 的值时， $N$ 是均值 $\lambda$ 的 Poisson 随机变量，其中 $\prod_{i=1}^{\mathrm{o}} U_{i} \equiv1$ 
+
+\textbf{证明：}
+
+(a) 由于$$\begin{aligned}
+P(X_{i}\leq t) & =P(-\frac{\ln U_{i}}{\lambda}\leq t) \\
+ & =P(U_{i}\geq e^{-\lambda t}) \\
+ & =1-e^{-\lambda t}
+\end{aligned}$$
+故$X_i$ 是具有失效率 $\lambda$ 的指数随机变量。
+
+(b) 两边取对数，
+$$\begin{aligned}
+    \sum_{i=1}^{n}\ln U_{i}&\geq-\lambda>\sum_{i=1}^{n+1}\ln U_{i}\\
+    \sum_{i=1}^{n}-\frac{\ln U_{i}}{\lambda}&\le1< \sum_{i=1}^{n+1}-\frac{\ln U_{i}}{\lambda}\\
+    \sum_{i=1}^{n}X_i&\le1< \sum_{i=1}^{n+1}X_i\\
+    N&\le N(1)<N+1
+\end{aligned}$$
+最后一项来自与 Poisson 过程的到达间隔是指数随机变量。
+由\(N\)是整数，故有\(N=N(1)\)为均值 $\lambda$ 的 Poisson 随机变量。
+
+\section*{2.17}
+令 $X_1,X_2,...,X_n$ 是具有相同的密度函数 f 的独立连续随机变量. 以 $X_{(i)}$ 记 $X_1,X_2,...,X_n$ 中第 i 个最小者.
+
+(a) 注意，为了使 $X_{(i)}$ 等于 x，恰好在 $X_1,X_2,...,X_n$ 中有 i-1 个必须小于 x，1 个必须等于 x，而其余的 n-i 个必须大于 x. 由此可证明 $X_{(i)}$ 的密度函数为
+$$f_{X_{(i)}}(x)=\frac{n!}{(i-1)!(n-i)!}(F(x))^{i-1}(\bar{F}(x))^{n-i}f(x).$$
+
+(b) $X_{(i)}$ 将小于 x，当且仅当 $X_1,X_2,...,X_n$ 中有多少个小干 x？
+
+(c) 利用 (b) 得到 $P\{X_{(i)}\le x\}$的一个表达式.
+
+(d) 利用 (a) 和 (c) 对 \(0 \le y \le 1\) 建立等式
+$$\sum_{k=i}^n\binom{n}{k}y^k(1-y)^{n-k}=\int_0^y\frac{n!}{(i-1)!(n-i)!}x^{i-1}(1-x)^{n-i}dx.$$
+
+(e) 以 $S_i$ 记 Poisson 过程 $\{N(t),t\ge0\}$的第 i 个事件的时刻. 求
+$$E[S_i|N(t)=n]=\left\{\begin{matrix}
+--&i\le n\\
+--&i>n
+\end{matrix}\right.$$
+
+\textbf{解：}
+
+(a)当\(\Delta x\)足够小，
+$$\begin{aligned}
+P(x\leq X_{(1)}<x+\Delta x) & =C_{n}^{i-1}C_{n-i+1}^{i-1}C_{n-i}^{n-i}({P(X_{1}<x)})^{i-1} \\
+ & \cdot(P(x\leq x<x+\Delta x))\cdot(P(x_{1}\geq x+\Delta x))^{n-i} \\
+ & =\frac{n!}{(i-1)!(n+1)!}\cdot(F(x))^{i-1}\cdot(\overline{F}(x+\Delta x))^{n-i}P(x\leq x<x+\Delta x) 
+\end{aligned}$$
+故$f_{X(i)}(x)=\lim_{\Delta x\to0}\frac{P(x\leq X_{i}<x+\Delta x)}{\Delta x}=\frac{n!}{(i-1)!(n-1)!}(F(x))^{i-1}(\overline{F}(x))^{n-i}f(x)$
+
+(b)$X_{(i)}$ 将小于 $x$ 并且仅当至少有 i 个小于 $x$
+
+(c)由(b)$$P\{X_{(i)}\leq x\}=\sum_{k=i}^{n}C_{n}^{k}(F(x))^{k}\cdot(\overline{F}(x))^{n-k}$$
+
+(d)取F为(0,1)均匀分布的CDF，
+故由$P(\{X_{(i)}\leq y\}=\int_{0}^{y}f_{X_{(i)}}(x)dx,$
+$$\sum_{k=i}^n\binom{n}{k}y^k\left(1-y\right)^{n-k}=\int_0^y\frac{n!}{\left(i-1\right)!\left(n-i\right)!}x^{i-1}\left(1-x\right)^{n-i}\mathrm{d}x.$$
+
+(e) 对于\(i\le n\)，由定理给定\(N(t)=n\),n个事件到达时间$(S_1,...,S_n)$与n个独立的(0,t)均匀随机变量的次序统计量有相同分布，则
+$$\begin{aligned}
+ E[S_i|N(t)=n]&=E[X_{(i)}]\\&=\int_{0}^{t}x\frac{n!}{(i-1)!(n-1)!}(\frac{x}{t})^{i-1}(1-\frac{x}{t})^{n-i}\cdot\frac{1}{t}dx\\&=t\int_{0}^{1}x\frac{n!}{(i-1)!(n-1)!}x^{i-1}(1-x)^{n-i}dx  \\ 
+ &=t\frac{i}{n+1}\sum_{k=i+1}^{n+1}\binom{n+1}{k}y^{k}(1-y)^{n+1-k}|_{y=1}\\
+ &=t\frac{i}{n+1}
+\end{aligned}$$
+对于\(i>n\)，由指数分布发无记忆性，$$\mathrm{E}[S_i|N(t)=n]=\mathrm{t}+\mathrm{E}[S_i-\mathrm{t}|N(t)=n]=t+E[X_{n+1}+\cdots+X_i]=t+\frac{i-n}{\lambda}$$
+\section*{2.20}
+假设速率为 $\lambda$ 的 Poisson 过程的事件分成类型 $1, 2, \cdots, k$ 之一。若事件发生在 $s,$ 
+则独立于一切其他情形，它以概率 $P_{i} \left( s \right) \left( \, i=\, 1 \,, \cdots, k \,, \, \sum_{1}^{k} P_{i} \left( s \right) \,=\, 1 \, \right)$ 分在类型i，以 $N_{i} ( t )$ 记在 $\left[ 0, t \right]$ 内发生的类型 $i$ 的事件数。证明 $N_{i} \left( t \right) \left( i=1, \cdots, k \right)$ 是独立的，且 $N_{i} ( t )$ 具有均值为 $\lambda\int_{0}^{t} P_{i} \left( s \right) \mathrm{d} s$ 的 Poisson 分布
+
+\textbf{证明：}
+给定 $\mathrm{N} ( t )=n$ 时， 其中$\mathrm{n}=\sum_{i=1}^{k} n_{i}$，到达时间服从(0,t)均匀分布，则分在各个类型的概率为
+$$
+p_{i}=\frac{1} {t} \int_{0}^{t} p_{i} ( x ) d x 
+$$
+则由全概率公式
+$$
+\begin{aligned} {{\mathrm{P} ( N_{i} ( t )=n_{i} ,i=1,2,\cdots,k)}} & {} {} {}=P ( N_{i} ( t )=n_{i},i=1,2,\cdots,k | N ( t )=n ) P ( N ( t )=n )
+\\
+&={\frac{n!} {n_{1}! \cdots n_{k}!}} p_{1}^{n_{1}} \cdots p_{k}^{n_{k}} {\frac{e^{-\lambda t} ( \lambda t )^{n}} {n!}} \\ {{}} & {{} {{} {}={\frac{e^{-\lambda p_{i} t} ( \lambda p_{1} t )^{n_{1}}} {n_{1}!}} \cdots{\frac{e^{-\lambda p_{k} t} ( \lambda p_{k} t )^{n_{k}}} {n_{k}!}}=\prod_{i=1}^{k} {\frac{e^{-\lambda p_{i} t} ( \lambda p_{i} t )^{n_{i}}} {n_{i}!}}}} \\ \end{aligned} 
+$$
+分布函数是可分离的，故
+$N_{i} ( t )$ 是独立的，且服从均值为 $\lambda p_{i}t=\lambda\int_{0}^{t} p_{i} ( s ) d s$ 的 Poisson 分布。
+
+\section*{2.29}
+对于非时齐 Poisson 过程，完成 $N(t + s) - N(t)$ 是均值为 $m(t + s) - m(t)$ 的 Poisson 随机变量的证明。
+
+\textbf{证明：}
+
+我们继续沿用书上的记号，由公理\((ii),(iii),(iv)\)，对固定的t
+$$\begin{aligned}
+P_{n}(s+h) & =P_{n}(s)P_{0}(h)+P_{n-1}(s)P_{1}(h)+o(h) \\
+ & =(1-\lambda(t+s) h)P_{n}(s)+\lambda(t+s) hP_{n-1}(s)+o(h).
+\end{aligned}$$
+故$$\frac{P_n(s+h)-P_n(s)}{h}=-\lambda(t+s) P_n(s)+\lambda(t+s) P_{n-1}(s)+\frac{o(h)}{h}.$$
+令 $h \to 0$，得到
+$$P^{\prime}_n\left(s\right)=-\lambda(t+s) P_n\left(s\right)+\lambda(t+s) P_{n-1}\left(s\right),$$
+或等价于
+$$\mathrm{e}^{\int_0^s\lambda(t+u)du}\left[P_n^{\prime}(s)+\lambda(t+s) P_n(s)\right]=\lambda(t+s)\mathrm{e}^{\int_0^s\lambda(t+u)du}P_{n-1}(s).$$
+即有
+$$\frac{\mathrm{d}}{\mathrm{d}s}(\mathrm{e}^{\int_0^s\lambda(t+u)du }P_n(s))=\lambda(t+s)\mathrm{e}^{\int_0^s\lambda(t+u)du }P_{n-1}(s).$$
+当\(n=1\)时，$$\frac{\mathrm{d}}{\mathrm{d}s}(\mathrm{e}^{\int_0^s\lambda(t+u)du }P_1(s))=\lambda(t+s),$$
+故由\(P_1(0)=0,\)有 $$P_1\left(s\right)=\int_0^s\lambda(t+u)du \mathrm{e}^{-\int_0^s\lambda(t+u)du }$$
+下面采用数学归纳法证明$P_n(s)=\mathrm{e}^{-\int_0^s\lambda(t+u)du }(\int_0^s\lambda(t+u)du)^n/n!$
+
+首先假定对\(n-1\)时成立，则有
+$$\frac{\mathrm{d}}{\mathrm{d}s}(\mathrm{e}^{\int_0^s\lambda(t+u)du}P_n(s))=\frac{\lambda(t+s)(\int_0^s\lambda(t+u)du)^{n-1}}{(n-1)!},$$
+解得$$\mathrm{e}^{\int_0^s\lambda(t+u)du}P_n(s)=\frac{(\int_0^s\lambda(t+u)du)^n}{n!}+c,$$
+由于\(P_n(0)=0,\)我们有$$P_n(s)=\mathrm{e}^{-\int_0^s\lambda(t+u)du }(\int_0^s\lambda(t+u)du)^n/n!,$$
+综上，我们得到了$N(t + s) - N(t)$ 是均值为 $\int_0^s\lambda(t+u)du=m(t + s) - m(t)$ 的 Poisson 随机变量。
+\section*{2.36}
+以C记在一个M/G/1的忙期完成服务的顾客数。求
+
+(a) $E[C].$
+
+(b) $ Var(C).$
+
+\textbf{解：}
+
+(a)
+书中已经推导出$$B(t,n)=\int_0^t\mathrm{e}^{-\lambda t}\frac{(\lambda t)^{n-1}}{n!}\mathrm{d}G_n(t).$$
+故令\(t\to\infty,\)
+\[P(C=n)=B(\infty,n)=\int_0^\infty\mathrm{e}^{-\lambda t}\frac{(\lambda t)^{n-1}}{n!}\mathrm{d}G_n(t)\]
+则有\[E[C]=\sum_{n=1}^\infty nP(C=n)=\sum_{n=1}^\infty n\int_0^\infty\mathrm{e}^{-\lambda t}\frac{(\lambda t)^{n-1}}{n!}\mathrm{d}G_n(t)\]
+
+(b) 同理\[Var(C)=\sum_{n=1}^\infty (n-E[C])^2P(C=n)=\sum_{n=1}^\infty (n-E[C])^2\int_0^\infty\mathrm{e}^{-\lambda t}\frac{(\lambda t)^{n-1}}{n!}\mathrm{d}G_n(t)\]
+\end{document}
